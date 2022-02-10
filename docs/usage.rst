@@ -1,8 +1,6 @@
 Usage
 =====
 
-.. _installation:
-
 Installation
 ------------
 
@@ -13,7 +11,7 @@ To use MolConfViewer, first install it using pip:
    (.venv) $ pip install molconfviewer
 
 Visualizing molecule
-----------------
+--------------------
 
 >>> from molconfviewer import MolConfViewer
 >>> mol_conf_viewer = MolConfViewer()
