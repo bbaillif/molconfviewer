@@ -13,7 +13,7 @@ class MolConfViewer():
                  style: str = "stick", 
                  draw_surface: bool = False, 
                  opacity: float = 0.5):
-        """Setup the viewer parameter
+        """Setup the viewer parameters
         Args:
             size: tuple(int, int), canvas size
             style: str, type of drawing molecule, see 3dmol.js
