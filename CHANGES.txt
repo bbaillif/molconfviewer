@@ -1,2 +1,5 @@
-20220209: Creating the package
+20200210: Upload to pip and github.
+Put visualization parameters in the __init__ of MolConfViewer.
+Renamed package and functions
 
+20220209: Creating the package
