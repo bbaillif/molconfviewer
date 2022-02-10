@@ -1,0 +1,12 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+molconfviewer/__init__.py
+molconfviewer/molconfviewer.py
+molconfviewer.egg-info/PKG-INFO
+molconfviewer.egg-info/SOURCES.txt
+molconfviewer.egg-info/dependency_links.txt
+molconfviewer.egg-info/requires.txt
+molconfviewer.egg-info/top_level.txt
