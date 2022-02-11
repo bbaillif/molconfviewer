@@ -2,3 +2,4 @@ molconfviewer.egg-info/
 dist/
 molconfviewer/__pycache__/
 docs/build
+molconfviewer/tests/.ipynb_checkpoints/
