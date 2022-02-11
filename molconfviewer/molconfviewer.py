@@ -1,3 +1,9 @@
+"""
+molconfviewer - Visualize molecule conformations in Jupyter
+"""
+
+__version__ = "0.1.0"
+
 import ipywidgets
 import py3Dmol
 
