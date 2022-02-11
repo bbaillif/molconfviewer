@@ -1,5 +1,6 @@
 version: 2
 
+# Mamba is faster than conda
 build:
   os: "ubuntu-20.04"
   tools:
@@ -9,5 +10,12 @@ sphinx:
   configuration: docs/source/conf.py
   fail_on_warning: true
 
+# Conda environment to load all the dependencies
 conda:
   environment: environment.yml
+
+# Install our python package before building the docs
+python:
+  install:
+    - method: pip
+      path: .
