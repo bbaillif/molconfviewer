@@ -13,13 +13,17 @@ class MolConfViewer():
                  style: str = "stick", 
                  draw_surface: bool = False, 
                  opacity: float = 0.5):
-        """Setup the viewer parameters
-        Args:
-            size: tuple(int, int), canvas size
-            style: str, type of drawing molecule, see 3dmol.js
-                   style can be 'line', 'stick', 'sphere', 'cartoon'
-            surface: bool, display SAS
-            opacity: float, opacity of surface, ranging from 0 to 1
+        """
+        Setup the viewer
+        
+        :param widget_size: canvas size
+        :type widget_size: tuple(int, int)
+        :param style: type of drawing molecule, see 3dmol.js
+        :type style: str in ['line', 'stick', 'sphere', 'cartoon']
+        :param draw_surface: display SAS
+        :type draw_surface: bool
+        :param opacity: opacity of surface, ranging from 0 to 1
+        :type opacity: float
         """
         self.widget_size = widget_size
         assert style in ('line', 'stick', 'sphere', 'cartoon')
@@ -31,10 +35,9 @@ class MolConfViewer():
         """View a RDKit molecule in 3D, with a slider to explore conformations
         Largely inspired from 
         https://birdlet.github.io/2019/10/02/py3dmol_example/
-        Args:
-            mol: rdMol, molecule to show
-        Returns:
-            Nothing, prints a jupyter widget to show the molecule
+        :param mol: molecule to show conformers for
+        :type mol: Mol
+        :return: Nothing, prints a jupyter widget to show the molecule
         """
 
         max_conf_id = mol.GetNumConformers() - 1
@@ -48,13 +51,15 @@ class MolConfViewer():
     def get_viewer(self, 
                     mol: Mol, 
                     conf_id: int = -1) -> py3Dmol.view:
-        """Draw a given conformation for a molecule in 3D
-        Args:
-            mol: Mol, molecule to show
-            conf_id: int, id of the RDKit Conformer in the Mol to visualize
-        Returns:
-            viewer: py3Dmol.view, a class for constructing embedded 3Dmol.js
-                views in Jupyter.
+        """
+        Draw a given conformation for a molecule in 3D using 3Dmol.js
+        
+        :param mol: molecule to show conformers for
+        :type mol: Mol
+        :param conf_id: id of the RDKit Conformer in the Mol to visualize
+        :type conf_id: int
+        :return: molecule viewer for given conf_id
+        :rtype: py3Dmol.view
         """
         
         mblock = Chem.MolToMolBlock(mol, confId=conf_id)

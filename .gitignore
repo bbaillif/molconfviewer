@@ -1,3 +1,4 @@
 molconfviewer.egg-info/
 dist/
 molconfviewer/__pycache__/
+docs/build
