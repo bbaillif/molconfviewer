@@ -19,3 +19,8 @@ python:
   install:
     - method: pip
       path: .
+
+# enable PDB and EPUB builds
+formats:
+  - pdf
+  - epub
