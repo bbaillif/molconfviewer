@@ -23,4 +23,4 @@ Visualizing molecule
    :maxdepth: 2
    :caption: Contents:
 
-   ../../molconfviewer/tests/molconfviewer_test
+   notebooks/molconfviewer_test
