@@ -1,8 +1,0 @@
-name: docs
-channels:
-  - conda-forge
-  - rdkit
-dependencies:
-  - sphinx==4.4.0
-  - pip:
-    - sphinx_rtd_theme==1.0.0
