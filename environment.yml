@@ -148,8 +148,11 @@ dependencies:
   - zlib=1.2.11=h7f8727e_4
   - zstd=1.4.9=haebb681_0
   - pip:
+    - ipywidgets==7.6.5
+    - jupyterlab-widgets==1.0.2
     - molconfviewer==0.0.2
     - py3dmol==1.8.0
     - readthedocs-sphinx-search==0.1.1
     - sphinx-rtd-theme==1.0.0
+    - widgetsnbextension==3.5.2
 prefix: /home/benoit/anaconda3/envs/molconfviewer
