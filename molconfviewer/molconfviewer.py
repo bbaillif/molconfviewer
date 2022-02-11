@@ -24,6 +24,7 @@ class MolConfViewer():
         :type draw_surface: bool
         :param opacity: opacity of surface, ranging from 0 to 1
         :type opacity: float
+        
         """
         self.widget_size = widget_size
         assert style in ('line', 'stick', 'sphere', 'cartoon')
@@ -32,12 +33,15 @@ class MolConfViewer():
         self.opacity = opacity
     
     def view(self, mol: Mol) :
-        """View a RDKit molecule in 3D, with a slider to explore conformations
+        """
+        View a RDKit molecule in 3D, with a slider to explore conformations
         Largely inspired from 
         https://birdlet.github.io/2019/10/02/py3dmol_example/
+        
         :param mol: molecule to show conformers for
         :type mol: Mol
         :return: Nothing, prints a jupyter widget to show the molecule
+        
         """
 
         max_conf_id = mol.GetNumConformers() - 1
@@ -60,6 +64,7 @@ class MolConfViewer():
         :type conf_id: int
         :return: molecule viewer for given conf_id
         :rtype: py3Dmol.view
+        
         """
         
         mblock = Chem.MolToMolBlock(mol, confId=conf_id)
