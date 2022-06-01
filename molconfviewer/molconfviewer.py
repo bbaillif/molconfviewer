@@ -38,27 +38,47 @@ class MolConfViewer():
         self.draw_surface = draw_surface
         self.opacity = opacity
     
-    def view(self, mol: Mol) :
+    def view(self, 
+             mol: Mol,
+             properties: dict=None) :
         """View a RDKit molecule in 3D, with a slider to explore conformations.
         Largely inspired from
         https://birdlet.github.io/2019/10/02/py3dmol_example/
         
         :param mol: molecule to show conformers for
         :type mol: Mol
-        :return: Nothing, prints a jupyter widget to show the molecule
+        :return: conf
+        :rtype: ipywidgets.IntSlider
         """
-
-        max_conf_id = mol.GetNumConformers() - 1
-        conf_id_slider = ipywidgets.IntSlider(min=0, 
+        n_confs = mol.GetNumConformers()
+        max_conf_id = n_confs - 1
+        # conf_id_slider = ipywidgets.IntSlider(min=0, 
+        #                                       max=max_conf_id, 
+        #                                       step=1)
+        conf_id_inttext = ipywidgets.BoundedIntText(min=0, 
                                               max=max_conf_id, 
-                                              step=1)
+                                              step=1,
+                                              description='Conformer ID:')
+        
+        if properties :
+            assert type(properties) == dict, \
+                'Type of properties must be a dict'
+            for property_name, values in properties.items() :
+                n_values = len(values)
+                assert n_values == n_confs, \
+                    f"""Length of property {property_name} = {n_values} must 
+                    be same as number of conformers = {n_confs}"""
+        
         interact(self.get_viewer, 
                  mol=fixed(mol), 
-                 conf_id=conf_id_slider)
+                 conf_id=conf_id_inttext,
+                 properties=fixed(properties))
+        return conf_id_inttext
         
     def get_viewer(self, 
                     mol: Mol, 
-                    conf_id: int = -1) -> py3Dmol.view:
+                    conf_id: int=-1,
+                    properties: dict=None) -> py3Dmol.view:
         """Draw a given conformation for a molecule in 3D using 3Dmol.js
         
         :param mol: molecule to show conformers for
@@ -73,8 +93,20 @@ class MolConfViewer():
         viewer = py3Dmol.view(width=self.widget_size[0], 
                               height=self.widget_size[1])
         viewer.addModel(mblock, 'mol')
-        viewer.setStyle({self.style:{}})
+        viewer.setStyle({'stick':{}, 'sphere':{'scale':0.25}})
         if self.draw_surface:
             viewer.addSurface(py3Dmol.SAS, {'opacity': self.opacity})
         viewer.zoomTo()
+        
+        if properties :
+            for property_name, values in properties.items() :
+                print(property_name, '=', values[conf_id])
         return viewer
+    
+    # DOESNT WORK, TODO ?
+    # def get_property_text(self,
+    #                       mol: Mol,
+    #                       conf_id: int=-1) -> str:
+        
+    #     conf = mol.GetConformer(conf_id)
+    #     prop = conf.GetProp()
