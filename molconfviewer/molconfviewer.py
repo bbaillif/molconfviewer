@@ -26,15 +26,16 @@ class MolConfViewer():
     """
     
     def __init__(self, 
-                 widget_size: Tuple[int, int] = (300, 300), 
-                 style: str = "stick", 
-                 draw_surface: bool = False, 
-                 opacity: float = 0.5):
+                 widget_size: Tuple[int, int]=(300, 300), 
+                 styles: list=['stick', 'sphere'], 
+                 draw_surface: bool=False, 
+                 opacity: float=0.5):
         """Setup the viewer
         """
         self.widget_size = widget_size
-        assert style in ('line', 'stick', 'sphere', 'cartoon')
-        self.style = style
+        for style in styles :
+            assert style in ('line', 'stick', 'sphere', 'cartoon')
+        self.styles = styles
         self.draw_surface = draw_surface
         self.opacity = opacity
     
@@ -93,7 +94,7 @@ class MolConfViewer():
         viewer = py3Dmol.view(width=self.widget_size[0], 
                               height=self.widget_size[1])
         viewer.addModel(mblock, 'mol')
-        viewer.setStyle({'stick':{}, 'sphere':{'scale':0.25}})
+        viewer = self.set_viewer_style(viewer)
         if self.draw_surface:
             viewer.addSurface(py3Dmol.SAS, {'opacity': self.opacity})
         viewer.zoomTo()
@@ -101,6 +102,17 @@ class MolConfViewer():
         if properties :
             for property_name, values in properties.items() :
                 print(property_name, '=', values[conf_id])
+        return viewer
+    
+    
+    def set_viewer_style(self, viewer) :
+        style_d = {}
+        for style in self.styles :
+            if style == 'sphere' :
+                style_d[style] = {'scale' : 0.25}
+            else :
+                style_d[style] = {}
+        viewer.setStyle(style_d)
         return viewer
     
     # DOESNT WORK, TODO ?
